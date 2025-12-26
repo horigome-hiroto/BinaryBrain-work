@@ -126,7 +126,11 @@ if WITH_CEREAL:
 if CUDA is not None:
     sources       += ['binarybrain/src/core_bbcu.cu']
     define_macros += [('BB_WITH_CUDA', '1')]
-    include_dirs  += [CUDA['include'], 'binarybrain/cuda']
+    # CUDA のヘッダと BinaryBrain のヘッダを両方見る
+    include_dirs  += [CUDA['include'],
+                      'binarybrain/cuda',
+                      '../cuda',
+                      '../include']
     lib_dirs      += [CUDA['lib']]
 
 ext_modules = [
@@ -314,20 +318,35 @@ class BuildExt(build_ext):
                         '-gencode=arch=compute_89,code=sm_89',
                         '-gencode=arch=compute_90,code=sm_90',
                     ]
+        # ==== ここからが修正版 ====  #
         # unix(gpu)
-        cc_args['unix'] += cuda_opts + [
-                            '-Xcompiler', '-pthread',
-                            '-Xcompiler', '-mavx2',
-                            '-Xcompiler', '-mfma',
-                            '-Xcompiler', '-fopenmp',
-                            '-Xcompiler', '-std=c++14',
-                            '-Xcompiler', '-fPIC' ]
+        # → C++(.cpp) は普通の g++ がコンパイルするので、
+        #    CUDA 専用の -gencode や -Xcompiler は付けない
+        cc_args['unix'] += [
+            '-mavx2',
+            '-mfma',
+            '-fopenmp',
+            '-std=c++14',
+            '-fPIC',
+        ]
+
+        # CUDA カーネル(.cu)は nvcc でコンパイルするので、
+        # こちらに -gencode や -Xcompiler をまとめる
         cu_args['unix'] += cuda_opts + [
-                            '-std=c++11',
-                            '-Xcompiler', '-fPIC' ]
-        ar_args['unix'] += ['-Xcompiler', '-pthread',
-                            '-Xcompiler', '-fopenmp',
-                            '-lstdc++', '-lm', '-lcublas']
+            '-std=c++11',
+            '-Xcompiler', '-pthread',
+            '-Xcompiler', '-mavx2',
+            '-Xcompiler', '-mfma',
+            '-Xcompiler', '-fopenmp',
+            '-Xcompiler', '-fPIC',
+        ]
+
+        ar_args['unix'] += [
+            '-Xcompiler', '-pthread',
+            '-Xcompiler', '-fopenmp',
+            '-lstdc++', '-lm', '-lcublas'
+        ]
+        # ==== 修正版ここまで ====  #
         
         # windows(gpu)
         cc_args['msvc'] += ['-O3',

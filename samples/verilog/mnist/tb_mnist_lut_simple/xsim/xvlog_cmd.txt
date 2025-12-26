@@ -1,3 +1,0 @@
-../tb_mnist_lut_simple.v
-../MnistLutSimple.v
-../../common/bb_lut.v

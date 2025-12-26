@@ -1,8 +1,0 @@
-../tb_mnist_lut_cnn.v
-../MnistLutCnn.v
--y ..
--y ../../common
--y ../../../../../jelly/rtl/library
--y ../../../../../jelly/rtl/image
--y ../../../../../jelly/rtl/video
--y ../../../../../jelly/rtl/model

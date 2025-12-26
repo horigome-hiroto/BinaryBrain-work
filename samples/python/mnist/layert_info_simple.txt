@@ -1,0 +1,1149 @@
+----------------------------------------------------------------------
+[Sequential] MnistSemanticSegmentationSimple_f3_b32_e128_8_16
+ input  shape : [1, 84, 84] output shape : [11, 28, 28]
+  --------------------------------------------------------------------
+  [RealToBinary] 
+   input  shape : {1, 84, 84} output shape : {1, 84, 84}
+  --------------------------------------------------------------------
+  [Sequential] 
+   input  shape : [1, 84, 84]   output shape : [11, 28, 28]
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [1, 84, 84]     output shape : [36, 82, 82]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv0_dw_lut_conv
+       input  shape : [1, 84, 84]       output shape : [36, 82, 82]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {1, 84, 84} output shape : {1, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv0_dw_lut_dl
+         input  shape : {1, 3, 3} output shape : {36, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 82, 82}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv0_pw_lut_conv
+       input  shape : [36, 82, 82]       output shape : [36, 82, 82]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 82, 82} output shape : {36, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [36, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv0_pw_lut_dl0
+           input  shape : {36, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv0_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 82, 82}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 82, 82]     output shape : [36, 80, 80]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv1_dw_lut_conv
+       input  shape : [36, 82, 82]       output shape : [216, 80, 80]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 82, 82} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv1_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 80, 80}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv1_pw_lut_conv
+       input  shape : [216, 80, 80]       output shape : [36, 80, 80]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 80, 80} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv1_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv1_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 80, 80}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 80, 80]     output shape : [36, 78, 78]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv2_dw_lut_conv
+       input  shape : [36, 80, 80]       output shape : [216, 78, 78]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 80, 80} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv2_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 78, 78}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv2_pw_lut_conv
+       input  shape : [216, 78, 78]       output shape : [36, 78, 78]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 78, 78} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv2_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv2_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 78, 78}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 78, 78]     output shape : [36, 76, 76]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv3_dw_lut_conv
+       input  shape : [36, 78, 78]       output shape : [216, 76, 76]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 78, 78} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv3_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 76, 76}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv3_pw_lut_conv
+       input  shape : [216, 76, 76]       output shape : [36, 76, 76]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 76, 76} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv3_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv3_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 76, 76}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 76, 76]     output shape : [36, 74, 74]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv4_dw_lut_conv
+       input  shape : [36, 76, 76]       output shape : [216, 74, 74]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 76, 76} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv4_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 74, 74}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv4_pw_lut_conv
+       input  shape : [216, 74, 74]       output shape : [36, 74, 74]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 74, 74} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv4_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv4_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 74, 74}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 74, 74]     output shape : [36, 72, 72]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv5_dw_lut_conv
+       input  shape : [36, 74, 74]       output shape : [216, 72, 72]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 74, 74} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv5_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 72, 72}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv5_pw_lut_conv
+       input  shape : [216, 72, 72]       output shape : [36, 72, 72]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 72, 72} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv5_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv5_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 72, 72}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 72, 72]     output shape : [36, 70, 70]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv6_dw_lut_conv
+       input  shape : [36, 72, 72]       output shape : [216, 70, 70]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 72, 72} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv6_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 70, 70}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv6_pw_lut_conv
+       input  shape : [216, 70, 70]       output shape : [36, 70, 70]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 70, 70} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv6_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv6_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 70, 70}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 70, 70]     output shape : [36, 68, 68]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv7_dw_lut_conv
+       input  shape : [36, 70, 70]       output shape : [216, 68, 68]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 70, 70} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv7_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 68, 68}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv7_pw_lut_conv
+       input  shape : [216, 68, 68]       output shape : [36, 68, 68]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 68, 68} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv7_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv7_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 68, 68}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 68, 68]     output shape : [36, 66, 66]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv8_dw_lut_conv
+       input  shape : [36, 68, 68]       output shape : [216, 66, 66]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 68, 68} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv8_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 66, 66}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv8_pw_lut_conv
+       input  shape : [216, 66, 66]       output shape : [36, 66, 66]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 66, 66} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv8_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv8_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 66, 66}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 66, 66]     output shape : [36, 64, 64]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv9_dw_lut_conv
+       input  shape : [36, 66, 66]       output shape : [216, 64, 64]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 66, 66} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv9_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 64, 64}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv9_pw_lut_conv
+       input  shape : [216, 64, 64]       output shape : [36, 64, 64]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 64, 64} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv9_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv9_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 64, 64}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 64, 64]     output shape : [36, 62, 62]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv10_dw_lut_conv
+       input  shape : [36, 64, 64]       output shape : [216, 62, 62]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 64, 64} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv10_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 62, 62}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv10_pw_lut_conv
+       input  shape : [216, 62, 62]       output shape : [36, 62, 62]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 62, 62} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv10_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv10_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 62, 62}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 62, 62]     output shape : [36, 60, 60]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv11_dw_lut_conv
+       input  shape : [36, 62, 62]       output shape : [216, 60, 60]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 62, 62} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv11_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 60, 60}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv11_pw_lut_conv
+       input  shape : [216, 60, 60]       output shape : [36, 60, 60]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 60, 60} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv11_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv11_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 60, 60}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 60, 60]     output shape : [36, 58, 58]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv12_dw_lut_conv
+       input  shape : [36, 60, 60]       output shape : [216, 58, 58]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 60, 60} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv12_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 58, 58}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv12_pw_lut_conv
+       input  shape : [216, 58, 58]       output shape : [36, 58, 58]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 58, 58} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv12_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv12_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 58, 58}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 58, 58]     output shape : [36, 56, 56]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv13_dw_lut_conv
+       input  shape : [36, 58, 58]       output shape : [216, 56, 56]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 58, 58} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv13_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 56, 56}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv13_pw_lut_conv
+       input  shape : [216, 56, 56]       output shape : [36, 56, 56]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 56, 56} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv13_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv13_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 56, 56}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 56, 56]     output shape : [36, 54, 54]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv14_dw_lut_conv
+       input  shape : [36, 56, 56]       output shape : [216, 54, 54]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 56, 56} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv14_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 54, 54}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv14_pw_lut_conv
+       input  shape : [216, 54, 54]       output shape : [36, 54, 54]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 54, 54} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv14_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv14_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 54, 54}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 54, 54]     output shape : [36, 52, 52]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv15_dw_lut_conv
+       input  shape : [36, 54, 54]       output shape : [216, 52, 52]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 54, 54} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv15_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 52, 52}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv15_pw_lut_conv
+       input  shape : [216, 52, 52]       output shape : [36, 52, 52]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 52, 52} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv15_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv15_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 52, 52}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 52, 52]     output shape : [36, 50, 50]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv16_dw_lut_conv
+       input  shape : [36, 52, 52]       output shape : [216, 50, 50]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 52, 52} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv16_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 50, 50}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv16_pw_lut_conv
+       input  shape : [216, 50, 50]       output shape : [36, 50, 50]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 50, 50} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv16_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv16_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 50, 50}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 50, 50]     output shape : [36, 48, 48]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv17_dw_lut_conv
+       input  shape : [36, 50, 50]       output shape : [216, 48, 48]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 50, 50} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv17_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 48, 48}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv17_pw_lut_conv
+       input  shape : [216, 48, 48]       output shape : [36, 48, 48]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 48, 48} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv17_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv17_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 48, 48}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 48, 48]     output shape : [36, 46, 46]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv18_dw_lut_conv
+       input  shape : [36, 48, 48]       output shape : [216, 46, 46]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 48, 48} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv18_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 46, 46}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv18_pw_lut_conv
+       input  shape : [216, 46, 46]       output shape : [36, 46, 46]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 46, 46} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv18_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv18_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 46, 46}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 46, 46]     output shape : [36, 44, 44]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv19_dw_lut_conv
+       input  shape : [36, 46, 46]       output shape : [216, 44, 44]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 46, 46} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv19_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 44, 44}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv19_pw_lut_conv
+       input  shape : [216, 44, 44]       output shape : [36, 44, 44]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 44, 44} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv19_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv19_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 44, 44}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 44, 44]     output shape : [36, 42, 42]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv20_dw_lut_conv
+       input  shape : [36, 44, 44]       output shape : [216, 42, 42]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 44, 44} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv20_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 42, 42}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv20_pw_lut_conv
+       input  shape : [216, 42, 42]       output shape : [36, 42, 42]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 42, 42} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv20_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv20_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 42, 42}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 42, 42]     output shape : [36, 40, 40]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv21_dw_lut_conv
+       input  shape : [36, 42, 42]       output shape : [216, 40, 40]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 42, 42} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv21_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 40, 40}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv21_pw_lut_conv
+       input  shape : [216, 40, 40]       output shape : [36, 40, 40]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 40, 40} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv21_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv21_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 40, 40}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 40, 40]     output shape : [36, 38, 38]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv22_dw_lut_conv
+       input  shape : [36, 40, 40]       output shape : [216, 38, 38]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 40, 40} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv22_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 38, 38}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv22_pw_lut_conv
+       input  shape : [216, 38, 38]       output shape : [36, 38, 38]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 38, 38} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv22_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv22_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 38, 38}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 38, 38]     output shape : [36, 36, 36]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv23_dw_lut_conv
+       input  shape : [36, 38, 38]       output shape : [216, 36, 36]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 38, 38} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv23_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 36, 36}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv23_pw_lut_conv
+       input  shape : [216, 36, 36]       output shape : [36, 36, 36]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 36, 36} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv23_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv23_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 36, 36}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 36, 36]     output shape : [36, 34, 34]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv24_dw_lut_conv
+       input  shape : [36, 36, 36]       output shape : [216, 34, 34]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 36, 36} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv24_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 34, 34}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv24_pw_lut_conv
+       input  shape : [216, 34, 34]       output shape : [36, 34, 34]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 34, 34} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv24_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv24_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 34, 34}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 34, 34]     output shape : [36, 32, 32]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv25_dw_lut_conv
+       input  shape : [36, 34, 34]       output shape : [216, 32, 32]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 34, 34} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv25_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 32, 32}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv25_pw_lut_conv
+       input  shape : [216, 32, 32]       output shape : [36, 32, 32]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 32, 32} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv25_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv25_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 32, 32}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 32, 32]     output shape : [36, 30, 30]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv26_dw_lut_conv
+       input  shape : [36, 32, 32]       output shape : [216, 30, 30]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 32, 32} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv26_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 30, 30}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv26_pw_lut_conv
+       input  shape : [216, 30, 30]       output shape : [36, 30, 30]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 30, 30} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv26_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv26_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 30, 30}
+    ------------------------------------------------------------------
+    [Sequential] 
+     input  shape : [36, 30, 30]     output shape : [36, 28, 28]
+      ----------------------------------------------------------------
+      [Convolution2d] cnv27_dw_lut_conv
+       input  shape : [36, 30, 30]       output shape : [216, 28, 28]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {36, 30, 30} output shape : {36, 3, 3}
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv27_dw_lut_dl
+         input  shape : {36, 3, 3} output shape : {216, 1, 1}
+         connection : random
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {216, 1, 1} output shape : {216, 28, 28}
+      ----------------------------------------------------------------
+      [Convolution2d] cnv27_pw_lut_conv
+       input  shape : [216, 28, 28]       output shape : [36, 28, 28]
+        --------------------------------------------------------------
+        [ConvolutionIm2Col] 
+         input  shape : {216, 28, 28} output shape : {216, 1, 1}
+        --------------------------------------------------------------
+        [Sequential] 
+         input  shape : [216, 1, 1]         output shape : [36, 1, 1]
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv27_pw_lut_dl0
+           input  shape : {216, 1, 1} output shape : {216, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+          ------------------------------------------------------------
+          [DifferentiableLut6] cnv27_pw_lut_dl1
+           input  shape : {216, 1, 1} output shape : {36, 1, 1}
+           connection : serial
+           binary : 1           batch_norm : 1
+        --------------------------------------------------------------
+        [ConvolutionCol2Im] 
+         input  shape : {36, 1, 1} output shape : {36, 28, 28}
+    ------------------------------------------------------------------
+    [Convolution2d] cnv28_lut_conv
+     input  shape : [36, 28, 28]     output shape : [72, 28, 28]
+      ----------------------------------------------------------------
+      [ConvolutionIm2Col] 
+       input  shape : {36, 28, 28} output shape : {36, 1, 1}
+      ----------------------------------------------------------------
+      [Sequential] 
+       input  shape : [36, 1, 1]       output shape : [72, 1, 1]
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv28_lut_dl0
+         input  shape : {36, 1, 1} output shape : {432, 1, 1}
+         connection : serial
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv28_lut_dl1
+         input  shape : {432, 1, 1} output shape : {72, 1, 1}
+         connection : serial
+         binary : 1         batch_norm : 1
+      ----------------------------------------------------------------
+      [ConvolutionCol2Im] 
+       input  shape : {72, 1, 1} output shape : {72, 28, 28}
+    ------------------------------------------------------------------
+    [Convolution2d] cnv29_lut_conv
+     input  shape : [72, 28, 28]     output shape : [11, 28, 28]
+      ----------------------------------------------------------------
+      [ConvolutionIm2Col] 
+       input  shape : {72, 28, 28} output shape : {72, 1, 1}
+      ----------------------------------------------------------------
+      [Sequential] 
+       input  shape : [72, 1, 1]       output shape : [11, 1, 1]
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv29_lut_dl0
+         input  shape : {72, 1, 1} output shape : {66, 1, 1}
+         connection : serial
+         binary : 1         batch_norm : 1
+        --------------------------------------------------------------
+        [DifferentiableLut6] cnv29_lut_dl1
+         input  shape : {66, 1, 1} output shape : {11, 1, 1}
+         connection : serial
+         binary : 1         batch_norm : 1
+      ----------------------------------------------------------------
+      [ConvolutionCol2Im] 
+       input  shape : {11, 1, 1} output shape : {11, 28, 28}
+  --------------------------------------------------------------------
+  [BinaryToReal] 
+   input  shape : {11, 28, 28} output shape : {11, 28, 28}
+----------------------------------------------------------------------
