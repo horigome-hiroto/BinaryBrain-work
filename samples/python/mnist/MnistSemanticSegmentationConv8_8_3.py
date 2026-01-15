@@ -168,8 +168,8 @@ if os.path.exists(dataset_fname):
         teaching_imgs_test = pickle.load(f)
 else:
     os.makedirs(data_path, exist_ok=True)
-    source_imgs_train, teaching_imgs_train = transform_data(dataset_train, 4032 rows, cols, 29)
-    source_imgs_test, teaching_imgs_test = transform_data(dataset_test, 96 rows, cols, 29)
+    source_imgs_train, teaching_imgs_train = transform_data(dataset_train, 4032, rows, cols, 29)
+    source_imgs_test, teaching_imgs_test = transform_data(dataset_test, 96, rows, cols, 29)
     with open(dataset_fname, 'wb') as f:
         pickle.dump(source_imgs_train, f)
         pickle.dump(teaching_imgs_train, f)
