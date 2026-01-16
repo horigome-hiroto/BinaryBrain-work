@@ -39,11 +39,11 @@ print(bb.get_version_string())
 # configuration
 bb.set_device(0)
 
-net_name               = 'MnistSemanticSegmentation_Conv8_8_3_th0.5_bg0.8_f3_b96_e64_2_2'
+net_name               = 'MnistSemanticSegmentation_Conv8_8_3_th0.5_bg0.9_f3_b96_e64_2_2'
 data_path              = os.path.join('./data/', net_name)
 
 rtl_sim_path           = '../../verilog/mnist/tb_mnist_semantic_segmentation'
-rtl_module_name        = 'MnistSemanticSegmentation_Conv8_8_3_th0.5_bg0.8_f3_b96_e64_2_2'
+rtl_module_name        = 'MnistSemanticSegmentation_Conv8_8_3_th0.5_bg0.9_f3_b96_e64_2_2'
 output_velilog_file    = os.path.join(data_path, net_name + '.v')
 sim_velilog_file       = os.path.join(rtl_sim_path, rtl_module_name + '.v')
 
@@ -109,7 +109,7 @@ def make_teacher_image(gen, rows, cols, margin=0):
             
     
             #修正部分
-            BG_KEEP = 0.8
+            BG_KEEP = 0.9
             bg = (1.0 - fg)
             mask = (np.random.rand(*bg.shape) < BG_KEEP).astype(np.float32)    
 
