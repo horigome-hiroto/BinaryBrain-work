@@ -39,11 +39,11 @@ print(bb.get_version_string())
 # configuration
 bb.set_device(0)
 
-net_name               = 'MnistSemanticSegmentation_Conv8_8_3_th0.5_bg0.8_f3_b96_e80_2_2'
+net_name               = 'MnistSemanticSegmentation_Conv8_8_3_invert_th0.5_bg0.8_f3_b96_e80_2_2'
 data_path              = os.path.join('./data/', net_name)
 
 rtl_sim_path           = '../../verilog/mnist/tb_mnist_semantic_segmentation'
-rtl_module_name        = 'MnistSemanticSegmentation_Conv8_8_3_th0.5_bg0.8_f3_b96_e80_2_2'
+rtl_module_name        = 'MnistSemanticSegmentation_Conv8_8_3_invert_th0.5_bg0.8_f3_b96_e80_2_2'
 output_velilog_file    = os.path.join(data_path, net_name + '.v')
 sim_velilog_file       = os.path.join(rtl_sim_path, rtl_module_name + '.v')
 
@@ -92,39 +92,42 @@ def make_teacher_image(gen, rows, cols, margin=0):
     #   img <  THRESH -> background
     THRESH = 0.5
     DIGIT_W = 1.0
-    
-    source_img  = np.zeros((1, rows*28, cols*28), dtype=np.float32)
+
+    # ★追加：このサンプル全体を反転するかどうかを先に決める
+    invert = (random.random() > 0.5)
+
+    source_img   = np.zeros((1, rows*28, cols*28), dtype=np.float32)
     teaching_img = np.zeros((11, rows*28, cols*28), dtype=np.float32)
+
+    BG_KEEP = 0.8  # （元コードの「修正部分」をここに移動してもOK）
+
     for row in range(rows):
         for col in range(cols):
-            x = col*28
-            y = row*28
+            x = col * 28
+            y = row * 28
             img, label = gen.__next__()
-            source_img[0, y:y+28, x:x+28] = img  # (source_imgの作り方は変えない)
 
-            # Foreground mask (0/1) to avoid contradictions between digit/background channels.
-            # Note: img may be a torch.Tensor; np.asarray makes it safely comparable with THRESH.
             img_np = np.asarray(img, dtype=np.float32)
+
+            # ★入力（source）だけ反転（教師ラベルは“数字領域”なので反転しない）
+            if invert:
+                src = 1.0 - img_np
+            else:
+                src = img_np
+
+            source_img[0, y:y+28, x:x+28] = src
+
+            # 教師は「数字領域」を表す（反転しても数字領域は同じ）
             fg = (img_np >= THRESH).astype(np.float32)
-            
-    
-            #修正部分
-            BG_KEEP = 0.8
             bg = (1.0 - fg)
-            mask = (np.random.rand(*bg.shape) < BG_KEEP).astype(np.float32)    
+
+            mask = (np.random.rand(*bg.shape) < BG_KEEP).astype(np.float32)
 
             teaching_img[label, y:y+28, x:x+28] = fg
             teaching_img[10,   y:y+28, x:x+28] = bg * mask
 
-    # 面積で重みを載せる
-    #for i in range(11):
-        #teaching_img[i] *= weight[i]
+    return source_img, teaching_img[:, margin:-margin, margin:-margin]
 
-    # ランダムに反転
-    #if random.random() > 0.5:
-        #source_img = 1.0 - source_img
-
-    return source_img, teaching_img[:,margin:-margin,margin:-margin]
 
 def transform_data(dataset, n, rows, cols, margin):
     def data_gen():
