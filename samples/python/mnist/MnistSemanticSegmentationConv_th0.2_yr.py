@@ -39,19 +39,19 @@ print(bb.get_version_string())
 # configuration
 bb.set_device(0)
 
-net_name               = 'MnistSemanticSegmentation_Conv8_8_3_invert_th0.5_bg0.8_f3_b96_e80_2_2'
+net_name               = 'MnistSemanticSegmentation_Conv8_8_3_invert_th0.5_bg0.8_f4_b75_e64_2_1'
 data_path              = os.path.join('./data/', net_name)
 
 rtl_sim_path           = '../../verilog/mnist/tb_mnist_semantic_segmentation'
-rtl_module_name        = 'MnistSemanticSegmentation_Conv8_8_3_invert_th0.5_bg0.8_f3_b96_e80_2_2'
+rtl_module_name        = 'MnistSemanticSegmentation_Conv8_8_3_invert_th0.5_bg0.8_f4_b75_e64_2_1'
 output_velilog_file    = os.path.join(data_path, net_name + '.v')
 sim_velilog_file       = os.path.join(rtl_sim_path, rtl_module_name + '.v')
 
 bin_mode               = True
-frame_modulation_size  = 3
+frame_modulation_size  = 4
 depth_integration_size = 1
 epochs                 = 64
-mini_batch_size        = 96
+mini_batch_size        = 75
 
 
 # ## データセット準備
@@ -171,8 +171,8 @@ if os.path.exists(dataset_fname):
         teaching_imgs_test = pickle.load(f)
 else:
     os.makedirs(data_path, exist_ok=True)
-    source_imgs_train, teaching_imgs_train = transform_data(dataset_train, 4032, rows, cols, 29)
-    source_imgs_test, teaching_imgs_test = transform_data(dataset_test, 192, rows, cols, 29)
+    source_imgs_train, teaching_imgs_train = transform_data(dataset_train, 4050, rows, cols, 29)
+    source_imgs_test, teaching_imgs_test = transform_data(dataset_test, 150, rows, cols, 29)
     with open(dataset_fname, 'wb') as f:
         pickle.dump(source_imgs_train, f)
         pickle.dump(teaching_imgs_train, f)
@@ -702,7 +702,7 @@ def distillation_layer(data_path, net, index, epochs=4):
 if not bb.load_networks(data_path, net, name='dense'):
     net.send_command("switch_model dense")
     net.send_command('parameter_lock false')
-    learning(os.path.join(data_path, 'dense'), net, epochs=80)
+    learning(os.path.join(data_path, 'dense'), net, epochs=64)
     bb.save_networks(data_path, net, name='dense')
 #   bb.save_networks(data_path, net, name='dense_layers', write_layers=True)
 
@@ -747,7 +747,7 @@ if not bb.load_networks(data_path, net, name='cnv30'):
             net.send_command('parameter_lock false')
             for j in range(i):
                 net.net_cnv[j].send_command("parameter_lock true")
-            learning_layer(os.path.join(data_path, layer_name), net, i, epochs=2)
+            learning_layer(os.path.join(data_path, layer_name), net, i, epochs=1)
     #       learning(os.path.join(data_path, layer_name), net, epochs=2)
 
             # 保存
