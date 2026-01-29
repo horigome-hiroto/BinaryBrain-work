@@ -130,11 +130,11 @@ print(bb.get_version_string())
 # configuration
 bb.set_device(0)
 
-net_name               = 'MnistSemanticSegmentation_Conv9_7_3_miou_th0.5_bg0.8_f3_b98_e84_2_2'
+net_name               = 'MnistSemanticSegmentation_Conv9_7_3_miou_th0.5_bg0.8_f3_b97_e84_2_2'
 data_path              = os.path.join('./data/', net_name)
 
 rtl_sim_path           = '../../verilog/mnist/tb_mnist_semantic_segmentation'
-rtl_module_name        = 'MnistSemanticSegmentation_Conv9_7_3_miou_th0.5_bg0.8_f3_b98_e84_2_2'
+rtl_module_name        = 'MnistSemanticSegmentation_Conv9_7_3_miou_th0.5_bg0.8_f3_b97_e84_2_2'
 output_velilog_file    = os.path.join(data_path, net_name + '.v')
 sim_velilog_file       = os.path.join(rtl_sim_path, rtl_module_name + '.v')
 
@@ -142,7 +142,7 @@ bin_mode               = True
 frame_modulation_size  = 3
 depth_integration_size = 1
 epochs                 = 64
-mini_batch_size        = 98
+mini_batch_size        = 97
 
 
 # ## データセット準備
@@ -259,8 +259,8 @@ if os.path.exists(dataset_fname):
         teaching_imgs_test = pickle.load(f)
 else:
     os.makedirs(data_path, exist_ok=True)
-    source_imgs_train, teaching_imgs_train = transform_data(dataset_train, 4018, rows, cols, 29)
-    source_imgs_test, teaching_imgs_test = transform_data(dataset_test, 98, rows, cols, 29)
+    source_imgs_train, teaching_imgs_train = transform_data(dataset_train, 4074, rows, cols, 29)
+    source_imgs_test, teaching_imgs_test = transform_data(dataset_test, 97, rows, cols, 29)
     with open(dataset_fname, 'wb') as f:
         pickle.dump(source_imgs_train, f)
         pickle.dump(teaching_imgs_train, f)
