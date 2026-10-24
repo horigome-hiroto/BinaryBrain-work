@@ -1,0 +1,39 @@
+{
+  "attachments": {
+    "g_research_miou_replicate_fixed.py": {
+      "sha256": "164e300071e7dd6f5149b054a507314395adde2639b7735ef4bea2d4c923aef7",
+      "size": 34439
+    },
+    "fpga_magazin_network_samepadding.py": {
+      "sha256": "8eb5022a572d855db36897d9a12c180dca1922400973cae9fdd320b3205ed80d",
+      "size": 33564
+    },
+    "experiment_common.py": {
+      "sha256": "8c0f78b8eedebf1f4bcc636b72e16dbf242452aeea3040fb61c0b6133c4e8e78",
+      "size": 44510
+    },
+    "experiment_lut.py": {
+      "sha256": "5958f53045e11511bc1ac8cbbd5da762629422068d3d8b69cc63442b0bcb5c80",
+      "size": 9130
+    },
+    "experiment_config.py": {
+      "sha256": "9bf0adfffa4d4a7fe2757097fea252a9704d2673b577743cf59bbafaa076868f",
+      "size": 7139
+    },
+    "experiment_metrics.py": {
+      "sha256": "c461585daaae57f3794b507e8c32a79e50c4f4d689bac20da28b022addbdf001",
+      "size": 7412
+    },
+    "experiment_dataset.py": {
+      "sha256": "202a07eab20f18b3ad21de691971b7ead2f0f574bf88a2323dd57c71f9470651",
+      "size": 10366
+    }
+  },
+  "unchanged_function_ast_sha256": {
+    "evaluate_segmentation": "27309038b7349b3373c3498f000cf333b7c12106deea6f2a452f2a56907af699",
+    "_train_epoch_whole": "b77df14a38ba88ea0c506797114816a70190c2b486453ff957a991ab0f819882",
+    "_train_epoch_tail": "cc8ebc0e813a367590161f7d3e8b9dfb8c962f08e729b25fa05a347206ee7509",
+    "train_whole_model": "c3cb6eaa2157ef37cc65502d792935243dc811a2c0053a20d5021cb9e4b9003b",
+    "train_tail_model": "52f2f6e38a9d1e049f5c3f1829ce37ff7f339a29b6b2d59d436a0637b795f214"
+  }
+}

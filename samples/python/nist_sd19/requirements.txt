@@ -1,0 +1,8 @@
+numpy==1.26.4
+Pillow>=10
+matplotlib==3.9.4
+contourpy==1.3.2
+tqdm
+torch
+pytest
+# BinaryBrain is built separately from this checkout, not replaced by a PyPI model.
