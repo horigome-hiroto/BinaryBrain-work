@@ -1,0 +1,159 @@
+{
+  "checked_at": "2026-10-24T09:49:00.722496+00:00",
+  "automated_tests": {
+    "passed": 9,
+    "failed": 0,
+    "warnings": "14 Matplotlib/pyparsing deprecation warnings"
+  },
+  "real_sd19": {
+    "download": "official ZIP GET, TLS and extraction CRC passed",
+    "sha256": "b387d65249b2d0ed429cf81967d4c40a9d01ca2f7bb3931c6a36d825bc22d411",
+    "root": "/workspace/.deps/sd19-download-check",
+    "all_size_checks": [
+      {
+        "hw": [
+          128,
+          128
+        ],
+        "manifest_id": "c629526dc6235afe6aa6",
+        "generation_seconds": 5.145355077998829
+      },
+      {
+        "hw": [
+          64,
+          64
+        ],
+        "manifest_id": "c629526dc6235afe6aa6",
+        "generation_seconds": 2.753892798000379
+      },
+      {
+        "hw": [
+          32,
+          32
+        ],
+        "manifest_id": "c629526dc6235afe6aa6",
+        "generation_seconds": 2.380052545999206
+      },
+      {
+        "hw": [
+          22,
+          22
+        ],
+        "manifest_id": "c629526dc6235afe6aa6",
+        "generation_seconds": 2.228768540000601
+      },
+      {
+        "hw": [
+          44,
+          44
+        ],
+        "manifest_id": "c629526dc6235afe6aa6",
+        "generation_seconds": 10.322095818999514
+      },
+      {
+        "hw": [
+          28,
+          28
+        ],
+        "manifest_id": "c629526dc6235afe6aa6",
+        "generation_seconds": 2.3805711019995215
+      }
+    ],
+    "real44": {
+      "manifest_id": "c629526dc6235afe6aa6",
+      "splits": {
+        "train": {
+          "n": 4096,
+          "retained_background_fraction": 0.7999355598465235,
+          "class_counts": [
+            406,
+            450,
+            391,
+            395,
+            401,
+            394,
+            368,
+            467,
+            412,
+            412
+          ]
+        },
+        "val": {
+          "n": 128,
+          "retained_background_fraction": 1.0,
+          "class_counts": [
+            11,
+            15,
+            10,
+            13,
+            12,
+            11,
+            9,
+            15,
+            16,
+            16
+          ]
+        },
+        "test": {
+          "n": 1024,
+          "retained_background_fraction": 1.0,
+          "class_counts": [
+            108,
+            111,
+            104,
+            103,
+            100,
+            68,
+            110,
+            102,
+            107,
+            111
+          ]
+        }
+      },
+      "loader_benchmark": {
+        "scope": "loader and original numpy conversion only, no network, GPU, or forward/backward",
+        "shape": [
+          44,
+          44
+        ],
+        "results": {
+          "baseline_in_memory": {
+            "images": 4096,
+            "seconds": [
+              0.06472657599988452,
+              0.05119615200055705,
+              0.04880068099919299
+            ],
+            "median_seconds": 0.05119615200055705
+          },
+          "sd19_mmap": {
+            "images": 4096,
+            "seconds": [
+              0.05236233300092863,
+              0.05120630599958531,
+              0.05083676999856834
+            ],
+            "median_seconds": 0.05120630599958531
+          }
+        }
+      }
+    }
+  },
+  "network_checks": {
+    "symbolic_factories": "both networks, all 6 sizes; FPGA blocks 1 and 36; both switch branches same output shape",
+    "real_forward_backward": "BLOCKED for both 44x44 configurations: binarybrain.core unavailable; CPU build Concatenate.h:264 unguarded CUDA reference",
+    "loss_and_metrics": "NumPy metric tests passed; real BinaryBrain Loss NOT executed",
+    "short_training": "NOT executed: same dependency blocker",
+    "all_size_numeric_consistency": "NOT executed: same dependency blocker",
+    "camera_and_rtl": "implemented retained exporter / patch inference; runtime NOT verified"
+  },
+  "no_long_training": true,
+  "existing_tracked_files_changed": false,
+  "remaining_limits": [
+    "No exact intra-epoch/Adam-state resume (original layer-boundary resume retained)",
+    "No actual training speed comparison; loader-only benchmark is recorded",
+    "Camera patches have context seams; no halo or whole-frame equivalence validated",
+    "RTL replicate-boundary correctness and KV260 synthesis not validated"
+  ]
+}
